@@ -3,13 +3,17 @@ using System.Collections;
 
 public class GameUI : MonoBehaviour
 {
-    public Texture BackgroundTexture;
+    public Texture StartGameTexture;
+    public Texture GameOverTexture;
 
     public float lifeTextureScale = 1;
     public Texture LifeTexture;
     public Texture[] NumberTexture;
 
     public int TotalLife = 5;
+
+    public bool isStartGame = false;
+    public bool isGameOver = false;
     
 
     public float TotalTime = 90;
@@ -36,11 +40,16 @@ public class GameUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.TotalTime >= 0)
+        if (this.isStartGame)
         {
-            this.TotalTime -= Time.deltaTime;
-            this.TimeTendigit = (int)this.TotalTime / 10;
-            this.TimeSingledigits = (int)this.TotalTime % 10;
+            if (this.TotalTime >= 0)
+            {
+                this.TotalTime -= Time.deltaTime;
+                this.TimeTendigit = (int)this.TotalTime / 10;
+                this.TimeSingledigits = (int)this.TotalTime % 10;
+            }
+            else
+                this.isGameOver = true;
         }
 
         this.widthOffset = (float)Screen.width / 1280.0f;
@@ -50,20 +59,31 @@ public class GameUI : MonoBehaviour
         {
             Application.LoadLevel(Application.loadedLevelName);
         }
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            this.isStartGame = true;
+        }
     }
-
-    
-
-    
 
     void OnGUI()
     {
-        if(this.BackgroundTexture != null)
-            GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), this.BackgroundTexture, ScaleMode.StretchToFill);
-
-        this.LifeGUI();
-        this.ScoreGUI();
-        this.TimeGUI();
+        if (this.isStartGame)
+        {
+            if (!this.isGameOver)
+            {
+                this.LifeGUI();
+                this.ScoreGUI();
+                this.TimeGUI();
+            }
+            else
+            {
+                if (this.GameOverTexture != null)
+                    GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), this.GameOverTexture, ScaleMode.StretchToFill);
+            }
+        }
+        else
+            if (this.StartGameTexture != null)
+                GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), this.StartGameTexture, ScaleMode.StretchToFill);
     }
 
     void LifeGUI()
@@ -128,5 +148,7 @@ public class GameUI : MonoBehaviour
     public void LoseLife(int life = 1)
     {
         this.TotalLife -= life;
+        if (this.TotalLife == 0)
+            this.isGameOver = true;
     }
 }

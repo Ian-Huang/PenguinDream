@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Create : MonoBehaviour
 {
+    private GameUI gameUIScript;
+
     public GameObject CreateObject;
     public float CreateDelayTime = 0.5f;    //¬í
 
@@ -16,6 +18,8 @@ public class Create : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        this.gameUIScript = GameObject.Find("GameUI").GetComponent<GameUI>();
+
         this.addTimeValue = 0;
         if (this.isOneByOne)
             CreateShootObject();
@@ -38,16 +42,24 @@ public class Create : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.isStartCreate && !this.isOneByOne)
+        if (this.gameUIScript.isStartGame)
         {
-            if (this.addTimeValue < this.CreateDelayTime)            
-                this.addTimeValue += Time.deltaTime;
-            
-            else
+            if (gameUIScript.isGameOver)
             {
-                this.CreateShootObject();
-                this.addTimeValue = 0;
-                this.isStartCreate = false;
+                Destroy(this.gameObject);
+            }
+
+            if (this.isStartCreate && !this.isOneByOne)
+            {
+                if (this.addTimeValue < this.CreateDelayTime)
+                    this.addTimeValue += Time.deltaTime;
+
+                else
+                {
+                    this.CreateShootObject();
+                    this.addTimeValue = 0;
+                    this.isStartCreate = false;
+                }
             }
         }
     }
