@@ -1,16 +1,21 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// //刪除進入範圍內的物件 (如果是海底則扣除企鵝生命)
+/// </summary>
 public class DestroyObject : MonoBehaviour
 {
-    public bool isDeduction = false;
+    public bool isDeductionLife = false;
     private GameUI gameUIScript;
 
     void OnTriggerEnter(Collider other)
     {
-        if (this.isDeduction)
+        //假如掉入海底，減少企鵝生命
+        if (this.isDeductionLife)
             this.gameUIScript.LoseLife();
 
+        //刪除進入範圍內的物件
         Destroy(other.gameObject);
     }
 
