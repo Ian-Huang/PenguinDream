@@ -9,6 +9,9 @@ public class IceController : MonoBehaviour
     public float UpDownSpeed = 1;       //漂浮的速度
     public float UpDownDistance = 1;    //漂浮的距離差
 
+    public AudioClip SuccessSound;              //成功跳上去的音效檔
+    private GameSound gameSoundScript;  //聲音播放的script
+
     private GameDefinition.Direction iceMoveDirection = GameDefinition.Direction.None;
     private float iceSpeed;
     private float addValue = 0;
@@ -21,6 +24,8 @@ public class IceController : MonoBehaviour
     {
         if (_object.rigidbody != null)
         {
+            this.gameSoundScript.PlaySound(this.SuccessSound);          //播放音效
+
             _object.GetComponent<TrailRenderer>().enabled = false;      //關閉尾勁特效
             GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
             gameUI.AddScore();
@@ -44,6 +49,7 @@ public class IceController : MonoBehaviour
 
     void Start()
     {
+        this.gameSoundScript = GameObject.Find("GameSound").GetComponent<GameSound>();
     }
 
     // Update is called once per frame
