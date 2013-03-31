@@ -46,7 +46,7 @@ public class Create : MonoBehaviour
         {
             if (gameUIScript.isGameOver)
             {
-                Destroy(this.gameObject);
+               Destroy(this.gameObject);
             }
 
             if (this.isStartCreate && !this.isOneByOne)
