@@ -9,9 +9,8 @@ public class IceController : MonoBehaviour
     public float UpDownSpeed = 1;       //漂浮的速度
     public float UpDownDistance = 1;    //漂浮的距離差
 
-    public AudioClip SuccessSound;              //成功跳上去的音效檔
-    private GameSound gameSoundScript;  //聲音播放的script
-
+    public LayerMask PlayerLayer;        //敵人的Layer
+    
     private GameDefinition.Direction iceMoveDirection = GameDefinition.Direction.None;
     private float iceSpeed;
     private float addValue = 0;
@@ -22,18 +21,23 @@ public class IceController : MonoBehaviour
     /// <param name="_object"></param>
     void OnTriggerEnter(Collider _object)
     {
-        if (_object.rigidbody != null)
+        if (((1 << _object.gameObject.layer) & this.PlayerLayer.value) > 0)
         {
-            this.gameSoundScript.PlaySound(this.SuccessSound);          //播放音效
-
             _object.GetComponent<TrailRenderer>().enabled = false;      //關閉尾勁特效
-            GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
-            gameUI.AddScore();
+            //GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
+            //gameUI.AddScore();
 
-            _object.transform.parent = this.transform;
-
+            _object.transform.parent = this.transform;            
             _object.rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+            
+            this.getPenguin = _object.gameObject;
+            Invoke("SetKinematic", 1);
         }
+    }
+    private GameObject getPenguin;
+    void SetKinematic()
+    {
+        this.getPenguin.rigidbody.isKinematic = true;        
     }
 
     /// <summary>
@@ -49,7 +53,6 @@ public class IceController : MonoBehaviour
 
     void Start()
     {
-        this.gameSoundScript = GameObject.Find("GameSound").GetComponent<GameSound>();
     }
 
     // Update is called once per frame

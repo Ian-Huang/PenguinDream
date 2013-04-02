@@ -145,6 +145,11 @@ public class GameUI : MonoBehaviour
         this.ScoreSingledigits = (int)this.TotalScore % 10;
     }
 
+    public void AddTime(int time = 10)
+    {
+        this.TotalTime += time;
+    }
+
     public void LoseLife(int life = 1)
     {
         this.TotalLife -= life;

@@ -8,7 +8,9 @@ public class CreateIce : MonoBehaviour
 {
     public float IceMoveSpeed;                  //浮冰移動的速度
     public GameDefinition.Direction direction;  //浮冰移動的方向
-    public GameObject IceObject;                //待產生的浮冰物件
+    public GameObject TimeObejct;               //待生產浮冰(上有+時間道具)
+    public GameObject IceObject;                //待生產浮冰(上無道具)
+    public GameObject IceObject_Star;           //待生產浮冰(上有星星)
 
     public bool Debug_isStart = false;          //Debug用，直接產生Ice
 
@@ -20,7 +22,14 @@ public class CreateIce : MonoBehaviour
         GameObject createObject;
         IceController iceScript;
 
-        createObject = (GameObject)Instantiate(this.IceObject, this.transform.position, Quaternion.identity);
+        int random = Random.Range(1, 11);
+        if (random <= 2)
+            createObject = (GameObject)Instantiate(this.TimeObejct, this.transform.position, Quaternion.identity);
+        else if (random <= 5)
+            createObject = (GameObject)Instantiate(this.IceObject, this.transform.position, Quaternion.identity);
+        else
+            createObject = (GameObject)Instantiate(this.IceObject_Star, this.transform.position, Quaternion.identity);
+
         createObject.transform.parent = this.transform;
         iceScript = createObject.GetComponent<IceController>();
         iceScript.SetIceAttributes(this.IceMoveSpeed, this.direction);
