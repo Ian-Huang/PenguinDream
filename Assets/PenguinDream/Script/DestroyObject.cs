@@ -13,8 +13,10 @@ public class DestroyObject : MonoBehaviour
     {
         //假如掉入海底，減少企鵝生命
         if (this.isDeductionLife)
+        {
+            GameCalculate.ComboCount = 0;
             this.gameUIScript.LoseLife();
-
+        }
         //刪除進入範圍內的物件
         Destroy(other.gameObject);
     }

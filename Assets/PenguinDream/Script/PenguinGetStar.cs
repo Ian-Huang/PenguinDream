@@ -6,6 +6,7 @@ using System.Collections;
 /// </summary>
 public class PenguinGetStar : MonoBehaviour
 {
+    public GameObject CombotextObject;
     public AudioClip SuccessSound;      //成功跳上去的音效檔    
     public LayerMask PlayerLayer;       //敵人的Layer
 
@@ -23,6 +24,11 @@ public class PenguinGetStar : MonoBehaviour
 
             GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
             gameUI.AddScore();
+
+            GameCalculate.ComboCount++;
+            GameCalculate.AddScore();
+            GameObject obj = (GameObject)Instantiate(this.CombotextObject);
+            obj.GetComponent<GUI_ComboText>().SetContent("Combo " + GameCalculate.ComboCount.ToString());            
 
             Destroy(this.gameObject);
         }
