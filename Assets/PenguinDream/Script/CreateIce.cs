@@ -7,7 +7,7 @@ using System.Collections;
 public class CreateIce : MonoBehaviour
 {
     public float IceMoveSpeed;                  //浮冰移動的速度
-    public GameDefinition.Direction direction;  //浮冰移動的方向
+    public GameManager.Direction direction;  //浮冰移動的方向
     public GameObject TimeObejct;               //待生產浮冰(上有+時間道具)
     public GameObject IceObject;                //待生產浮冰(上無道具)
     public GameObject IceObject_Star;           //待生產浮冰(上有星星)

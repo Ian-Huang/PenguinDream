@@ -52,9 +52,7 @@ public class GameUI : MonoBehaviour
                 this.isGameOver = true;
         }
 
-        this.widthOffset = (float)Screen.width / 1280.0f;
-        this.heightOffset = (float)Screen.height / 720.0f;
-
+        
         if(Input.GetKeyUp(KeyCode.Q))
         {
             Application.LoadLevel(Application.loadedLevelName);
@@ -91,10 +89,10 @@ public class GameUI : MonoBehaviour
         for (int i = 1; i <= this.TotalLife; i++)
         {
             GUI.DrawTexture(new Rect(
-                (1280 - 10 - (LifeTexture.width * this.lifeTextureScale) * i) * this.widthOffset,
-                13 * this.heightOffset,
-                this.LifeTexture.width * this.lifeTextureScale * this.widthOffset,
-                this.LifeTexture.height * this.lifeTextureScale * this.heightOffset),
+                (1280 - 10 - (LifeTexture.width * this.lifeTextureScale) * i) * GameManager.WidthOffset,
+                13 * GameManager.HeightOffset,
+                this.LifeTexture.width * this.lifeTextureScale * GameManager.WidthOffset,
+                this.LifeTexture.height * this.lifeTextureScale * GameManager.HeightOffset),
                 this.LifeTexture,
                 ScaleMode.StretchToFill);
         }
@@ -103,18 +101,18 @@ public class GameUI : MonoBehaviour
     void TimeGUI()
     {
         GUI.DrawTexture(new Rect(
-            173 * this.widthOffset,
-            13 * this.heightOffset,
-            this.NumberTexture[this.TimeTendigit].width * this.widthOffset,
-            this.NumberTexture[this.TimeTendigit].height * this.heightOffset),
+            173 * GameManager.WidthOffset,
+            13 * GameManager.HeightOffset,
+            this.NumberTexture[this.TimeTendigit].width * GameManager.WidthOffset,
+            this.NumberTexture[this.TimeTendigit].height * GameManager.HeightOffset),
             this.NumberTexture[this.TimeTendigit],
             ScaleMode.StretchToFill);
 
         GUI.DrawTexture(new Rect(
-            245 * this.widthOffset,
-            13 * this.heightOffset,
-            this.NumberTexture[this.TimeSingledigits].width * this.widthOffset,
-            this.NumberTexture[this.TimeSingledigits].height * this.heightOffset),
+            245 * GameManager.WidthOffset,
+            13 * GameManager.HeightOffset,
+            this.NumberTexture[this.TimeSingledigits].width * GameManager.WidthOffset,
+            this.NumberTexture[this.TimeSingledigits].height * GameManager.HeightOffset),
             this.NumberTexture[this.TimeSingledigits],
             ScaleMode.StretchToFill);
     }
@@ -122,18 +120,18 @@ public class GameUI : MonoBehaviour
     void ScoreGUI()
     {
         GUI.DrawTexture(new Rect(
-            573 * this.widthOffset,
-            13 * this.heightOffset,
-            this.NumberTexture[this.ScoreTendigit].width * this.widthOffset,
-            this.NumberTexture[this.ScoreTendigit].height * this.heightOffset),
+            573 * GameManager.WidthOffset,
+            13 * GameManager.HeightOffset,
+            this.NumberTexture[this.ScoreTendigit].width * GameManager.WidthOffset,
+            this.NumberTexture[this.ScoreTendigit].height * GameManager.HeightOffset),
             this.NumberTexture[this.ScoreTendigit],
             ScaleMode.StretchToFill);
 
         GUI.DrawTexture(new Rect(
-            645 * this.widthOffset,
-            13 * this.heightOffset,
-            this.NumberTexture[this.ScoreSingledigits].width * this.widthOffset,
-            this.NumberTexture[this.ScoreSingledigits].height * this.heightOffset),
+            645 * GameManager.WidthOffset,
+            13 * GameManager.HeightOffset,
+            this.NumberTexture[this.ScoreSingledigits].width * GameManager.WidthOffset,
+            this.NumberTexture[this.ScoreSingledigits].height * GameManager.HeightOffset),
             this.NumberTexture[this.ScoreSingledigits],
             ScaleMode.StretchToFill);
     }

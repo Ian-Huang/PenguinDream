@@ -27,15 +27,15 @@ public class CreateIceManager : MonoBehaviour
         } while (random == this.currentLayout);
         this.currentLayout = random;
 
-        switch ((GameDefinition.Layout)this.currentLayout)
+        switch ((GameManager.Layout)this.currentLayout)
         {
-            case GameDefinition.Layout.Front:
+            case GameManager.Layout.Front:
                 GameObject.Find("Layout_Front").GetComponent<CreateIce>().CreateIceObject();
                 break;
-            case GameDefinition.Layout.Center:
+            case GameManager.Layout.Center:
                 GameObject.Find("Layout_Center").GetComponent<CreateIce>().CreateIceObject();
                 break;
-            case GameDefinition.Layout.Back:
+            case GameManager.Layout.Back:
                 GameObject.Find("Layout_Back").GetComponent<CreateIce>().CreateIceObject();
                 break;
         }

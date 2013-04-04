@@ -11,7 +11,7 @@ public class IceController : MonoBehaviour
 
     public LayerMask PlayerLayer;        //敵人的Layer
     
-    private GameDefinition.Direction iceMoveDirection = GameDefinition.Direction.None;
+    private GameManager.Direction iceMoveDirection = GameManager.Direction.None;
     private float iceSpeed;
     private float addValue = 0;
 
@@ -45,7 +45,7 @@ public class IceController : MonoBehaviour
     /// </summary>
     /// <param name="speed">浮冰移動速度</param>
     /// <param name="direction">浮冰移動的方向</param>
-    public void SetIceAttributes(float speed, GameDefinition.Direction direction)
+    public void SetIceAttributes(float speed, GameManager.Direction direction)
     {
         this.iceSpeed = speed;
         this.iceMoveDirection = direction;
@@ -73,9 +73,9 @@ public class IceController : MonoBehaviour
         //------------------------------------------------
 
         // 控制浮冰的移動
-        if (this.iceMoveDirection != GameDefinition.Direction.None)
+        if (this.iceMoveDirection != GameManager.Direction.None)
         {
-            if (this.iceMoveDirection == GameDefinition.Direction.LeftToRight)
+            if (this.iceMoveDirection == GameManager.Direction.LeftToRight)
                 this.transform.position += ((Vector3.right * this.iceSpeed) + (Vector3.up * this.UpDownSpeed)) * Time.deltaTime;
 
             else

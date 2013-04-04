@@ -25,10 +25,10 @@ public class PenguinGetTime : MonoBehaviour
             GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
             gameUI.AddTime();
 
-            GameCalculate.ComboCount++;
-            GameCalculate.AddScore();
+            GameManager.ComboCount++;
+            GameManager.AddScore();
             GameObject obj = (GameObject)Instantiate(this.CombotextObject);
-            obj.GetComponent<GUI_ComboText>().SetContent("Combo " + GameCalculate.ComboCount.ToString());
+            obj.GetComponent<GUI_ComboText>().SetContent("Combo " + GameManager.ComboCount.ToString());
 
             Destroy(this.gameObject);
         }
