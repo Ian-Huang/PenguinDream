@@ -3,12 +3,18 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
+    public int totalLife;
+    public int totalTime;
+
     public static GameObject UIMenu_Title { get; set; }
     public static GameObject UIMenu_Maker { get; set; }
 
+    public static int TotalTime { get; set; }
+    public static int TotalLife { get; set; }
+    public static float TotalGetStar { get; set; }
+
     public static int ComboCount { get; set; }
     public static int TotalScore { get; set; }
-    public static float TotalTime { get; set; }
     public static float WidthOffset { get; set; }
     public static float HeightOffset { get; set; }
     public static GameState gameState { get; set; }
@@ -35,31 +41,41 @@ public class GameManager : MonoBehaviour
 
         //GameObject.Find("GameUI").GetComponent<GameUI>().TotalScore = TotalScore;
     }
-    
-    public static void UIButtonClick(UIChoose choose)
+
+    public static void UIButtonClick(UIButtonEvent choose)
     {
         switch (choose)
         {
-            case UIChoose.Nothing:
+            case UIButtonEvent.Nothing:
                 break;
-            case UIChoose.StartGame:
+            case UIButtonEvent.StartGame:
                 UIMenu_Title.SetActive(false);
                 GameObject.Find("GameUI").GetComponent<GameUI>().isStartGame = true;
                 break;
-            case UIChoose.Maker:
+            case UIButtonEvent.Maker:
                 UIMenu_Title.SetActive(false);
                 UIMenu_Maker.SetActive(true);
                 break;
-            case UIChoose.MakerCancel:
+            case UIButtonEvent.MakerBack:
                 UIMenu_Maker.SetActive(false);
-                UIMenu_Title.SetActive(true);                
+                UIMenu_Title.SetActive(true);
                 break;
-            case UIChoose.ExitGame:
+            case UIButtonEvent.ExitGame:
                 Application.Quit();
+                break;
+            case UIButtonEvent.ResultBack:
+                Application.LoadLevel(Application.loadedLevel);
                 break;
             default:
                 break;
         }
+    }
+
+
+    void Awake()
+    {
+        TotalLife = this.totalLife;
+        TotalTime = this.totalTime;
     }
 
     // Use this for initialization
@@ -98,12 +114,18 @@ public class GameManager : MonoBehaviour
         Menu, Game, CalculateScore
     }
 
-    public enum UIChoose
+    public enum UIButtonEvent
     {
         Nothing,
         StartGame,
-        Maker, MakerCancel,
-        ExitGame
+        Maker, MakerBack,
+        ExitGame,
+        ResultBack
+    }
+
+    public enum UITextPattern
+    {
+        ShadowAndOutline, Shadow, Outline
     }
     #endregion
 

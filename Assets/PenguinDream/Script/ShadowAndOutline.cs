@@ -3,7 +3,7 @@ using System.Collections;
 
 public static class ShadowAndOutline
 {
-    public static void DrawOutline(Rect rect, string text, GUIStyle style, Color outColor, Color inColor, float size)
+    public static void DrawOutline(Rect rect, GUIContent content, GUIStyle style, Color outColor, Color inColor, float size)
     {
         float halfSize = size * 0.5F;
         GUIStyle backupStyle = new GUIStyle(style);
@@ -13,22 +13,22 @@ public static class ShadowAndOutline
         GUI.color = outColor;
 
         rect.x -= halfSize;
-        GUI.Label(rect, text, style);
+        GUI.Label(rect, content, style);
 
         rect.x += size;
-        GUI.Label(rect, text, style);
+        GUI.Label(rect, content, style);
 
         rect.x -= halfSize;
         rect.y -= halfSize;
-        GUI.Label(rect, text, style);
+        GUI.Label(rect, content, style);
 
         rect.y += size;
-        GUI.Label(rect, text, style);
+        GUI.Label(rect, content, style);
 
         rect.y -= halfSize;
         style.normal.textColor = inColor;
         GUI.color = backupColor;
-        GUI.Label(rect, text, style);
+        GUI.Label(rect, content, style);
 
         style = backupStyle;
     }

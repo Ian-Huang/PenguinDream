@@ -28,7 +28,7 @@ public class PenguinGetStar : MonoBehaviour
             GameManager.ComboCount++;
             GameManager.AddScore();
             GameObject obj = (GameObject)Instantiate(this.CombotextObject);
-            obj.GetComponent<GUI_ComboText>().SetContent("Combo " + GameManager.ComboCount.ToString());            
+            obj.GetComponent<DrawCustomText>().SetContent("Combo " + GameManager.ComboCount.ToString());            
 
             Destroy(this.gameObject);
         }
