@@ -22,9 +22,7 @@ public class PenguinGetTime : MonoBehaviour
         {
             this.gameSoundScript.PlaySound(this.SuccessSound);          //¼½©ñ­µ®Ä
 
-            GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
-            gameUI.AddTime();
-
+            GameManager.AddTime();
             GameManager.ComboCount++;
             GameManager.AddScore();
             GameObject obj = (GameObject)Instantiate(this.CombotextObject);
@@ -33,6 +31,7 @@ public class PenguinGetTime : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
 
     // Use this for initialization
     void Start()

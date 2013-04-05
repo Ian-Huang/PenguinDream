@@ -22,13 +22,11 @@ public class PenguinGetStar : MonoBehaviour
         {
             this.gameSoundScript.PlaySound(this.SuccessSound);          //¼½©ñ­µ®Ä
 
-            GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
-            gameUI.AddScore();
-
+            GameManager.TotalGetStar++;
             GameManager.ComboCount++;
             GameManager.AddScore();
             GameObject obj = (GameObject)Instantiate(this.CombotextObject);
-            obj.GetComponent<DrawCustomText>().SetContent("Combo " + GameManager.ComboCount.ToString());            
+            obj.GetComponent<DrawCustomText>().SetContent("Combo " + GameManager.ComboCount.ToString());
 
             Destroy(this.gameObject);
         }

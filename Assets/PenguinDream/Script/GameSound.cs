@@ -6,7 +6,7 @@ public class GameSound : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        this.transform.position = GameObject.Find("MainCamera").transform.position;
     }
 
     // Update is called once per frame

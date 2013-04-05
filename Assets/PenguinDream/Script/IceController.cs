@@ -24,9 +24,7 @@ public class IceController : MonoBehaviour
         if (((1 << _object.gameObject.layer) & this.PlayerLayer.value) > 0)
         {
             _object.GetComponent<TrailRenderer>().enabled = false;      //Ãö³¬§À«l¯S®Ä
-            //GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
-            //gameUI.AddScore();
-
+            
             _object.transform.parent = this.transform;            
             _object.rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
             

@@ -4,14 +4,16 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public int totalLife;
-    public int totalTime;
+    public float totalTime;
 
     public static GameObject UIMenu_Title { get; set; }
     public static GameObject UIMenu_Maker { get; set; }
+    public static GameObject GameUI { get; set; }
+    public static GameObject ResultUI { get; set; }
 
-    public static int TotalTime { get; set; }
+    public static float TotalTime { get; set; }
     public static int TotalLife { get; set; }
-    public static float TotalGetStar { get; set; }
+    public static int TotalGetStar { get; set; }
 
     public static int ComboCount { get; set; }
     public static int TotalScore { get; set; }
@@ -38,8 +40,6 @@ public class GameManager : MonoBehaviour
 
         else
             TotalScore += ComboCount * 30;
-
-        //GameObject.Find("GameUI").GetComponent<GameUI>().TotalScore = TotalScore;
     }
 
     public static void UIButtonClick(UIButtonEvent choose)
@@ -48,27 +48,62 @@ public class GameManager : MonoBehaviour
         {
             case UIButtonEvent.Nothing:
                 break;
+
             case UIButtonEvent.StartGame:
                 UIMenu_Title.SetActive(false);
-                GameObject.Find("GameUI").GetComponent<GameUI>().isStartGame = true;
+                GameUI.SetActive(true);
+                gameState = GameState.Game;
                 break;
+
             case UIButtonEvent.Maker:
                 UIMenu_Title.SetActive(false);
                 UIMenu_Maker.SetActive(true);
                 break;
+
             case UIButtonEvent.MakerBack:
                 UIMenu_Maker.SetActive(false);
                 UIMenu_Title.SetActive(true);
                 break;
+
             case UIButtonEvent.ExitGame:
                 Application.Quit();
                 break;
+
             case UIButtonEvent.ResultBack:
                 Application.LoadLevel(Application.loadedLevel);
                 break;
+
             default:
                 break;
         }
+    }
+
+    public static int GetGameValue(GameValue value)
+    {
+        switch (value)
+        {
+            case GameValue.Time:
+                return (Mathf.FloorToInt(TotalTime) + 1);
+
+            case GameValue.Star:
+                return TotalGetStar;
+
+            case GameValue.Score:
+                return TotalScore;
+        }
+        return 0;
+    }
+
+    public static void LoseLife(int life = 1)
+    {
+        TotalLife -= life;
+        if (TotalLife == 0)
+            gameState = GameState.CalculateScore;
+    }
+
+    public static void AddTime(int time = 10)
+    {
+        TotalTime += time;
     }
 
 
@@ -83,23 +118,57 @@ public class GameManager : MonoBehaviour
     {
         ComboCount = 0;
         TotalScore = 0;
+        TotalGetStar = 0;
         gameState = GameState.Menu;
         UIMenu_Title = GameObject.Find("Menu-Title");
         UIMenu_Maker = GameObject.Find("Menu-Maker");
+        GameUI = GameObject.Find("GameUI");
+        ResultUI = GameObject.Find("ResultUI");
         UIMenu_Maker.SetActive(false);
+        GameUI.SetActive(false);
+        ResultUI.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Q))
+            Application.LoadLevel(Application.loadedLevelName);
+
         WidthOffset = (float)Screen.width / 1280.0f;
         HeightOffset = (float)Screen.height / 720.0f;
+
+        switch (gameState)
+        {
+            case GameState.Menu:
+                break;
+
+            case GameState.Game:
+                if (TotalTime >= 0)
+                    TotalTime -= Time.deltaTime;
+                else
+                    gameState = GameState.CalculateScore;
+                break;
+
+            case GameState.CalculateScore:
+                if (!ResultUI.activeSelf)
+                {
+                    GameUI.SetActive(false);
+                    ResultUI.SetActive(true);
+                }
+                break;
+
+            default:
+                break;
+        }
     }
 
     #region Enum Define
     public enum Direction
     {
-        None, RightToLeft, LeftToRight
+        None,
+        RightToLeft,
+        LeftToRight
     }
 
     public enum Layout
@@ -123,9 +192,17 @@ public class GameManager : MonoBehaviour
         ResultBack
     }
 
+    public enum GameValue
+    {
+        Time,
+        Star, Score
+    }
+
     public enum UITextPattern
     {
-        ShadowAndOutline, Shadow, Outline
+        ShadowAndOutline,
+        Shadow,
+        Outline
     }
     #endregion
 

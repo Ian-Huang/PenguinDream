@@ -14,14 +14,16 @@ public class DrawPenguinLife : MonoBehaviour
     public Vector2 TexturePosition;         //¶K¹Ï¦ì¸m
     public GUIStyle TextureStyle;           //¶K¹Ïstyle
 
+    private int maxLife;
     void Start()
     {
-        this.currentLife = GameManager.TotalLife;
+        this.currentLife = this.maxLife = GameManager.TotalLife;
     }
 
     void OnGUI()
     {
-        for (int i = 0; i < GameManager.TotalLife; i++)
+        this.currentLife = GameManager.TotalLife;
+        for (int i = 0; i < this.maxLife; i++)
         {
             if (this.currentLife > i)
             {

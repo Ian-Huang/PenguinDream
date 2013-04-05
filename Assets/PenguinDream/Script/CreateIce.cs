@@ -25,7 +25,7 @@ public class CreateIce : MonoBehaviour
         int random = Random.Range(1, 11);
         if (random <= 2)
             createObject = (GameObject)Instantiate(this.TimeObejct, this.transform.position, Quaternion.identity);
-        else if (random <= 5)
+        else if (random <= 4)
             createObject = (GameObject)Instantiate(this.IceObject, this.transform.position, Quaternion.identity);
         else
             createObject = (GameObject)Instantiate(this.IceObject_Star, this.transform.position, Quaternion.identity);

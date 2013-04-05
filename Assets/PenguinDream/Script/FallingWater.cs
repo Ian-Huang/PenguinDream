@@ -8,6 +8,9 @@ public class FallingWater : MonoBehaviour
 {
     public GameObject Watersplash;      //水花
     public AudioClip clip;              //落水的音效檔
+    public GameObject SoundObject;
+
+    private GameObject cloneSoundObject;
     private GameSound gameSoundScript;  //聲音播放的script
 
     void OnTriggerEnter(Collider other)
@@ -22,11 +25,17 @@ public class FallingWater : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        Destroy(this.cloneSoundObject);
+    }
+
 
     // Use this for initialization
     void Start()
     {
-        this.gameSoundScript = GameObject.Find("GameSound").GetComponent<GameSound>();
+        this.cloneSoundObject = (GameObject)Instantiate(this.SoundObject, this.transform.position, Quaternion.identity);
+        this.gameSoundScript = this.cloneSoundObject.GetComponent<GameSound>();
     }
 
     // Update is called once per frame
