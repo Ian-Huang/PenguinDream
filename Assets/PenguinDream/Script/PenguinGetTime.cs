@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 public class PenguinGetTime : MonoBehaviour
 {
-    public GameObject CombotextObject;
+    public GameObject AddTimetextObject;
     public AudioClip SuccessSound;      //成功跳上去的音效檔    
     public LayerMask PlayerLayer;       //敵人的Layer
 
@@ -23,10 +23,9 @@ public class PenguinGetTime : MonoBehaviour
             this.gameSoundScript.PlaySound(this.SuccessSound);          //播放音效
 
             GameManager.AddTime();
-            GameManager.ComboCount++;
             GameManager.AddScore();
-            GameObject obj = (GameObject)Instantiate(this.CombotextObject);
-            obj.GetComponent<DrawCustomText>().SetContent("Combo " + GameManager.ComboCount.ToString());
+            GameObject obj = (GameObject)Instantiate(this.AddTimetextObject);
+            obj.GetComponent<DrawCustomText>().SetContent("+10 秒");
 
             Destroy(this.gameObject);
         }

@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         switch (value)
         {
             case GameValue.Time:
-                return (Mathf.FloorToInt(TotalTime) + 1);
+                return Mathf.FloorToInt(TotalTime);
 
             case GameValue.Star:
                 return TotalGetStar;
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         TotalLife = this.totalLife;
-        TotalTime = this.totalTime;
+        TotalTime = this.totalTime + 1;
     }
 
     // Use this for initialization
@@ -144,8 +144,12 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.Game:
-                if (TotalTime >= 0)
+                if (TotalTime > 3)
                     TotalTime -= Time.deltaTime;
+                else if (TotalTime >= 0)
+                {
+                    TotalTime -= Time.deltaTime;
+                }
                 else
                     gameState = GameState.CalculateScore;
                 break;

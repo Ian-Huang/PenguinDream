@@ -9,17 +9,18 @@ public class FallingWater : MonoBehaviour
     public GameObject Watersplash;      //水花
     public AudioClip clip;              //落水的音效檔
     public GameObject SoundObject;
+    public LayerMask PenguinLayer;
 
     private GameObject cloneSoundObject;
     private GameSound gameSoundScript;  //聲音播放的script
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.transform.parent.transform.name == "ShootObjectGarbage")
+        if (((1 << other.gameObject.layer) & this.PenguinLayer.value) > 0)
         {
             this.gameSoundScript.PlaySound(this.clip);              //播放音效
             other.GetComponent<TrailRenderer>().enabled = false;    //關閉尾勁特效
-            
+
             //產生水花
             Instantiate(this.Watersplash, other.transform.position, this.Watersplash.transform.rotation);
         }
