@@ -182,6 +182,14 @@ public class GameManager : MonoBehaviour
         Back
     }
 
+    public enum FallingLayout
+    {
+        None,
+        Front,
+        Center,
+        Back
+    }
+
     public enum GameState
     {
         Menu, Game, CalculateScore

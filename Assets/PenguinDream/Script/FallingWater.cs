@@ -8,6 +8,7 @@ public class FallingWater : MonoBehaviour
 {
     public GameObject Watersplash;      //水花
     public AudioClip clip;              //落水的音效檔
+    public GameManager.FallingLayout fallingLayout;
     public GameObject SoundObject;
     public LayerMask PenguinLayer;
 
@@ -20,7 +21,8 @@ public class FallingWater : MonoBehaviour
         {
             this.gameSoundScript.PlaySound(this.clip);              //播放音效
             other.GetComponent<TrailRenderer>().enabled = false;    //關閉尾勁特效
-
+            DestroyOutObject.PenguinFallingList.Add(this.fallingLayout);
+                        
             //產生水花
             Instantiate(this.Watersplash, other.transform.position, this.Watersplash.transform.rotation);
         }
