@@ -51,7 +51,6 @@ public class FishTrace : MonoBehaviour
                         Mathf.LerpAngle(0, 30, this.speed),
                         this.rotateZ
                     );
-
             }
             else
             {
