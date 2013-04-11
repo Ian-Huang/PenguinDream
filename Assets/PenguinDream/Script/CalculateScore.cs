@@ -53,6 +53,10 @@ public class CalculateScore : MonoBehaviour
                     if (GameManager.TotalScore >= this.tempValue)
                     {
                         GameManager.TotalScore = this.tempValue;
+                        if (GameManager.TotalScore > GameManager.HighScore)
+                        {
+                            PlayerPrefs.SetInt("HighScore", GameManager.TotalScore);
+                        }
                         this.isStartCalculate = false;
                     }
                     break;

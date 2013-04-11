@@ -25,7 +25,7 @@ public class PenguinGetTime : MonoBehaviour
             GameManager.AddTime();
             GameManager.AddScore();
             GameObject obj = (GameObject)Instantiate(this.AddTimetextObject);
-            obj.GetComponent<DrawCustomText>().SetContent("+10 ¬í");
+            obj.GetComponent<DrawCustomText>().SetContent("+10s");
 
             Destroy(this.gameObject);
         }

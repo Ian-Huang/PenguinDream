@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public static int ComboCount { get; set; }
     public static int TotalScore { get; set; }
+    public static int HighScore { get; set; }
+
     public static float WidthOffset { get; set; }
     public static float HeightOffset { get; set; }
     public static GameState gameState { get; set; }
@@ -90,6 +92,9 @@ public class GameManager : MonoBehaviour
 
             case GameValue.Score:
                 return TotalScore;
+
+            case GameValue.HighScore:
+                return HighScore;
         }
         return 0;
     }
@@ -116,6 +121,7 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        HighScore = PlayerPrefs.GetInt("HighScore", 0);
         ComboCount = 0;
         TotalScore = 0;
         TotalGetStar = 0;
@@ -207,7 +213,8 @@ public class GameManager : MonoBehaviour
     public enum GameValue
     {
         Time,
-        Star, Score
+        Star, Score,
+        HighScore
     }
 
     public enum UITextPattern
