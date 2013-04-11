@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKeyUp(KeyCode.R))
             Application.LoadLevel(Application.loadedLevelName);
 
         WidthOffset = (float)Screen.width / 1280.0f;

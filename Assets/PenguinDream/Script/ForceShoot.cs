@@ -53,7 +53,7 @@ public class ForceShoot : MonoBehaviour
         //{
         if (!this.isShoot)
         {
-            if (Input.GetKeyUp(KeyCode.F))
+            if (Input.GetKeyUp(KeyCode.Z))
             {
                 this.create.ChangeCreateState();
                 this.penguinScript.TargetAngle.y = Random.Range(120, 240);
@@ -64,7 +64,7 @@ public class ForceShoot : MonoBehaviour
                 this.transform.parent = GameObject.Find("ShootObjectGarbage").transform;
                 this.isShoot = true;
             }
-            else if (Input.GetKeyUp(KeyCode.C))
+            else if (Input.GetKeyUp(KeyCode.A))
             {
                 this.create.ChangeCreateState();
                 this.penguinScript.TargetAngle.y = Random.Range(120, 240);
@@ -75,7 +75,7 @@ public class ForceShoot : MonoBehaviour
                 this.transform.parent = GameObject.Find("ShootObjectGarbage").transform;
                 this.isShoot = true;
             }
-            else if (Input.GetKeyUp(KeyCode.B))
+            else if (Input.GetKeyUp(KeyCode.Q))
             {
                 this.create.ChangeCreateState();
                 this.penguinScript.TargetAngle.y = Random.Range(120, 240);
