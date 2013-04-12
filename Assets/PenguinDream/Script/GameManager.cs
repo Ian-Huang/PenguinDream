@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public static GameObject UIMenu_Title { get; set; }
     public static GameObject UIMenu_Maker { get; set; }
+    public static GameObject UIMenu_Instruction { get; set; }
     public static GameObject GameUI { get; set; }
     public static GameObject ResultUI { get; set; }
 
@@ -75,6 +76,15 @@ public class GameManager : MonoBehaviour
                 Application.LoadLevel(Application.loadedLevel);
                 break;
 
+            case UIButtonEvent.Instruction:
+                UIMenu_Title.SetActive(false);
+                UIMenu_Instruction.SetActive(true);
+                break;
+
+            case UIButtonEvent.InstructionBack:
+                UIMenu_Instruction.SetActive(false);
+                UIMenu_Title.SetActive(true);
+                break;
             default:
                 break;
         }
@@ -128,9 +138,11 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Menu;
         UIMenu_Title = GameObject.Find("Menu-Title");
         UIMenu_Maker = GameObject.Find("Menu-Maker");
+        UIMenu_Instruction = GameObject.Find("Menu-Instruction");
         GameUI = GameObject.Find("GameUI");
         ResultUI = GameObject.Find("ResultUI");
         UIMenu_Maker.SetActive(false);
+        UIMenu_Instruction.SetActive(false);
         GameUI.SetActive(false);
         ResultUI.SetActive(false);
     }
@@ -207,7 +219,8 @@ public class GameManager : MonoBehaviour
         StartGame,
         Maker, MakerBack,
         ExitGame,
-        ResultBack
+        ResultBack,
+        Instruction, InstructionBack
     }
 
     public enum GameValue

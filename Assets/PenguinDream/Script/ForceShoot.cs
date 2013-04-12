@@ -49,8 +49,6 @@ public class ForceShoot : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //if (this.phidgetSetting.PhidgetKit != null)
-        //{
         if (!this.isShoot)
         {
             if (Input.GetKeyUp(KeyCode.Z))
@@ -87,61 +85,63 @@ public class ForceShoot : MonoBehaviour
                 this.isShoot = true;
             }
 
-            if (this.phidgetSetting.PhidgetKit.sensors[this.PortShoot].Value < this.LimitValue)
-                this.create.CanCreate = true;
-
-
-            if (this.create.CanCreate)
+            if (this.phidgetSetting.isOpenPhidget)
             {
-                if (this.phidgetSetting.PhidgetKit.sensors[this.PortFront].Value > this.LimitValue)
-                {
-                    if (this.phidgetSetting.PhidgetKit.sensors[this.PortShoot].Value > this.LimitValue)
-                    {
-                        this.create.ChangeCreateState();
-                        this.penguinScript.TargetAngle.y = Random.Range(120, 240);
-                        this.transform.rigidbody.isKinematic = false;
-                        this.transform.rigidbody.AddForce(this.transform.parent.TransformDirection(this.FrontShootForce), mode);
+                if (this.phidgetSetting.PhidgetKit.sensors[this.PortShoot].Value < this.LimitValue)
+                    this.create.CanCreate = true;
 
-                        this.gameSoundScript.PlaySound(this.clip);              //播放音效
-                        this.transform.parent = GameObject.Find("ShootObjectGarbage").transform;
-                        this.isShoot = true;
-                        this.create.CanCreate = false;
+
+                if (this.create.CanCreate)
+                {
+                    if (this.phidgetSetting.PhidgetKit.sensors[this.PortFront].Value > this.LimitValue)
+                    {
+                        if (this.phidgetSetting.PhidgetKit.sensors[this.PortShoot].Value > this.LimitValue)
+                        {
+                            this.create.ChangeCreateState();
+                            this.penguinScript.TargetAngle.y = Random.Range(120, 240);
+                            this.transform.rigidbody.isKinematic = false;
+                            this.transform.rigidbody.AddForce(this.transform.parent.TransformDirection(this.FrontShootForce), mode);
+
+                            this.gameSoundScript.PlaySound(this.clip);              //播放音效
+                            this.transform.parent = GameObject.Find("ShootObjectGarbage").transform;
+                            this.isShoot = true;
+                            this.create.CanCreate = false;
+                        }
                     }
-                }
 
-                else if (this.phidgetSetting.PhidgetKit.sensors[this.PortCenter].Value > this.LimitValue)
-                {
-                    if (this.phidgetSetting.PhidgetKit.sensors[this.PortShoot].Value > this.LimitValue)
+                    else if (this.phidgetSetting.PhidgetKit.sensors[this.PortCenter].Value > this.LimitValue)
                     {
-                        this.create.ChangeCreateState();
-                        this.penguinScript.TargetAngle.y = Random.Range(120, 240);
-                        this.transform.rigidbody.isKinematic = false;
-                        this.transform.rigidbody.AddForce(this.transform.parent.TransformDirection(this.CenterShootForce), mode);
+                        if (this.phidgetSetting.PhidgetKit.sensors[this.PortShoot].Value > this.LimitValue)
+                        {
+                            this.create.ChangeCreateState();
+                            this.penguinScript.TargetAngle.y = Random.Range(120, 240);
+                            this.transform.rigidbody.isKinematic = false;
+                            this.transform.rigidbody.AddForce(this.transform.parent.TransformDirection(this.CenterShootForce), mode);
 
-                        this.gameSoundScript.PlaySound(this.clip);              //播放音效
-                        this.transform.parent = GameObject.Find("ShootObjectGarbage").transform;
-                        this.isShoot = true;
-                        this.create.CanCreate = false;
+                            this.gameSoundScript.PlaySound(this.clip);              //播放音效
+                            this.transform.parent = GameObject.Find("ShootObjectGarbage").transform;
+                            this.isShoot = true;
+                            this.create.CanCreate = false;
+                        }
                     }
-                }
 
-                else if (this.phidgetSetting.PhidgetKit.sensors[this.PortBack].Value > this.LimitValue)
-                {
-                    if (this.phidgetSetting.PhidgetKit.sensors[this.PortShoot].Value > this.LimitValue)
+                    else if (this.phidgetSetting.PhidgetKit.sensors[this.PortBack].Value > this.LimitValue)
                     {
-                        this.create.ChangeCreateState();
-                        this.penguinScript.TargetAngle.y = Random.Range(120, 240);
-                        this.transform.rigidbody.isKinematic = false;
-                        this.transform.rigidbody.AddForce(this.transform.parent.TransformDirection(this.BackShootForce), mode);
+                        if (this.phidgetSetting.PhidgetKit.sensors[this.PortShoot].Value > this.LimitValue)
+                        {
+                            this.create.ChangeCreateState();
+                            this.penguinScript.TargetAngle.y = Random.Range(120, 240);
+                            this.transform.rigidbody.isKinematic = false;
+                            this.transform.rigidbody.AddForce(this.transform.parent.TransformDirection(this.BackShootForce), mode);
 
-                        this.gameSoundScript.PlaySound(this.clip);              //播放音效
-                        this.transform.parent = GameObject.Find("ShootObjectGarbage").transform;
-                        this.isShoot = true;
-                        this.create.CanCreate = false;
+                            this.gameSoundScript.PlaySound(this.clip);              //播放音效
+                            this.transform.parent = GameObject.Find("ShootObjectGarbage").transform;
+                            this.isShoot = true;
+                            this.create.CanCreate = false;
+                        }
                     }
                 }
             }
         }
-        //}
     }
 }

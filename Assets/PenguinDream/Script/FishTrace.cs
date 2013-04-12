@@ -20,10 +20,10 @@ public class FishTrace : MonoBehaviour
             this.penguin = other.gameObject;
             this.Fish.animation.Stop();
 
-            if ((this.penguin.transform.position.z - this.Fish.transform.position.z) > 0)
-                this.rotateZ = 0;
-            else
-                this.rotateZ = 180;
+            //if ((this.penguin.transform.position.z - this.Fish.transform.position.z) > 0)
+            //    this.rotateZ = 0;
+            //else
+            //    this.rotateZ = 180;
         }
 
     }
@@ -49,7 +49,7 @@ public class FishTrace : MonoBehaviour
                 this.Fish.transform.localEulerAngles = new Vector3(
                         0,
                         Mathf.LerpAngle(0, 30, this.speed),
-                        this.rotateZ + Vector2.Angle(new Vector2(1, 0), new Vector2(this.penguin.transform.position.x - this.Fish.transform.position.x, this.penguin.transform.position.z - this.Fish.transform.position.z).normalized)
+                        180 + Vector2.Angle(new Vector2(1, 0), new Vector2(this.penguin.transform.position.x - this.Fish.transform.position.x, this.penguin.transform.position.z - this.Fish.transform.position.z).normalized)
                         );
             }
             else
